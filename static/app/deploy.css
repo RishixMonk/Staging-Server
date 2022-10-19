@@ -1,0 +1,32 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-buttons {
+    display: flex; 
+    justify-content: flex-end
+}
+
+@media only screen and (max-width: 576px) {
+    .card {
+      margin: 8px !important;
+    }
+
+    .container-fluid {
+        padding: 0 !important;
+    }
+
+    .status {
+        flex-direction: column;
+    }
+
+    .control-buttons {
+        justify-content: flex-start;
+        margin-top: 4px;
+    }
+}
