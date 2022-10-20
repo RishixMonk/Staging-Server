@@ -9,8 +9,8 @@ from subprocess import PIPE, run
 
 
 @shared_task(bind=True)
-def deployFromImage(self,externalPort=find_free_port(),internalPort="3000"):
-    dockerImage = "tutum/hello-world:latest"
+def deployFromImage(self,dockerImage,externalPort=find_free_port(),internalPort="3000"):
+    # dockerImage = "tutum/hello-world:latest"
     # internal_port = "3000"
     # externalport = find_free_port(),
     # check if container is already running
