@@ -1,16 +1,30 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponseRedirect
 from .redisserver import f1
 from .tasks import deployFromImage
+from .models import Info
+from .forms import Infoform
 # Tell RQ what Redis connection to use
      # Create your views here.
 
 def index(request):
-    return render(request,'index.html')
+    return render(request,'index1.html')
 
 def id(request):
-    return HttpResponse("hii")
+    info=Info.objects.all()
+
+    for i in info:
+        dockerimage = i.imagename
+        internalport = i.portno
+        deployFromImage.delay(dockerimage,internalport)
+   
+    return render(request,'index2.html',{'info':info})
 
 def test(request):
-    dockerimage,internalport=f1()
-    deployFromImage.delay(dockerimage,internalport)
-    return HttpResponse("Done")
+    # dockerimage,internalport=f1()
+    # deployFromImage.delay(dockerimage,internalport)
+    if request.method == "POST":
+        form=Infoform(request.POST)
+        form.save()
+        return HttpResponseRedirect('/id')
+    form=Infoform
+    return render(request,'index.html',{'form':form})
