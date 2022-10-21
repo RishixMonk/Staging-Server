@@ -21,10 +21,19 @@
     </style>
   </head>
   <body>
-    <form action=" " method="POST">
+    <form action="{%url 'id' %}" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
+        
         <div class="container-fluid ele">
+            {{form.as_p}}
+            {% comment %} <div class="form-group">
+                <label for="exampleInputEmail1"></label>
+                <input type="text" class="form-control" name="imagename" id="imagename" aria-describedby="emailHelp" placeholder="Enter DockerImage Name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Portno</label>
+                <input type="number" class="form-control" name="Portno" id="Portno" placeholder="Port no">
+              </div> {% endcomment %}
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
